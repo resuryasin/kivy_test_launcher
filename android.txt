@@ -1,0 +1,3 @@
+title = Kalkulator
+author = Surya
+orientation = portrait
