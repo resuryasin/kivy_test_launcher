@@ -15,11 +15,22 @@ build-android:
       uses: ArtemSBulgakov/buildozer-action@v1
       id: buildozer
       with:
+        command: buildozer android debug
         workdir: test_app
         buildozer_version: stable
+
+
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: 3.7
+        architecture: x64
 
     - name: Upload artifacts
       uses: actions/upload-artifact@v2
       with:
         name: package
         path: ${{ steps.buildozer.outputs.filename }}
+
+    - name: Push binary to data branch
+      run: python master/.ci/move_binary.py "${{ steps.buildozer.outputs.filename }}" master data
