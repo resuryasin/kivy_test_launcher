@@ -24,10 +24,11 @@ jobs:
           path: master
 
       - name: Build with Buildozer
-        uses: ArtemSBulgakov/buildozer-action@v1
+        uses: ./master # REPLACE WITH ArtemSBulgakov/buildozer-action@v1
         id: buildozer
         with:
-​          workdir: test_app
+          repository_root: master
+          workdir: test_app
           buildozer_version: stable
 
       - name: Checkout
